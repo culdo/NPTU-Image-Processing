@@ -91,7 +91,8 @@ function edit1_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of edit1 as text
 %        str2double(get(hObject,'String')) returns contents of edit1 as a double
-
+set(handles.slider1, 'Value', str2double(get(hObject,'String')));
+draw_yuv(handles);
 
 % --- Executes during object creation, after setting all properties.
 function edit1_CreateFcn(hObject, eventdata, handles)
@@ -114,7 +115,8 @@ function slider1_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
+set(handles.edit1, 'String', get(hObject,'Value'));
+draw_yuv(handles);
 
 % --- Executes during object creation, after setting all properties.
 function slider1_CreateFcn(hObject, eventdata, handles)
@@ -136,7 +138,8 @@ function edit2_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of edit2 as text
 %        str2double(get(hObject,'String')) returns contents of edit2 as a double
-
+set(handles.slider2, 'Value', str2double(get(hObject,'String')));
+draw_yuv(handles);
 
 % --- Executes during object creation, after setting all properties.
 function edit2_CreateFcn(hObject, eventdata, handles)
@@ -159,6 +162,8 @@ function slider2_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+set(handles.edit2, 'String', get(hObject,'Value'));
+draw_yuv(handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -181,7 +186,8 @@ function edit3_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of edit3 as text
 %        str2double(get(hObject,'String')) returns contents of edit3 as a double
-
+set(handles.slider3, 'Value', str2double(get(hObject,'String')));
+draw_yuv(handles);
 
 % --- Executes during object creation, after setting all properties.
 function edit3_CreateFcn(hObject, eventdata, handles)
@@ -204,6 +210,8 @@ function slider3_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+set(handles.edit3, 'String', get(hObject,'Value'));
+draw_yuv(handles);
 
 
 % --- Executes during object creation, after setting all properties.
