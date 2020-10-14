@@ -1,35 +1,35 @@
-function varargout = yuv_gui(varargin)
-% YUV_GUI MATLAB code for yuv_gui.fig
-%      YUV_GUI, by itself, creates a new YUV_GUI or raises the existing
+function varargout = bias_gui(varargin)
+% BIAS_GUI MATLAB code for bias_gui.fig
+%      BIAS_GUI, by itself, creates a new BIAS_GUI or raises the existing
 %      singleton*.
 %
-%      H = YUV_GUI returns the handle to a new YUV_GUI or the handle to
+%      H = BIAS_GUI returns the handle to a new BIAS_GUI or the handle to
 %      the existing singleton*.
 %
-%      YUV_GUI('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in YUV_GUI.M with the given input arguments.
+%      BIAS_GUI('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in BIAS_GUI.M with the given input arguments.
 %
-%      YUV_GUI('Property','Value',...) creates a new YUV_GUI or raises the
+%      BIAS_GUI('Property','Value',...) creates a new BIAS_GUI or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before yuv_gui_OpeningFcn gets called.  An
+%      applied to the GUI before bias_gui_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to yuv_gui_OpeningFcn via varargin.
+%      stop.  All inputs are passed to bias_gui_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help yuv_gui
+% Edit the above text to modify the response to help bias_gui
 
-% Last Modified by GUIDE v2.5 10-Oct-2020 23:10:45
+% Last Modified by GUIDE v2.5 15-Oct-2020 04:46:18
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @yuv_gui_OpeningFcn, ...
-                   'gui_OutputFcn',  @yuv_gui_OutputFcn, ...
+                   'gui_OpeningFcn', @bias_gui_OpeningFcn, ...
+                   'gui_OutputFcn',  @bias_gui_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -44,37 +44,33 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before yuv_gui is made visible.
-function yuv_gui_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before bias_gui is made visible.
+function bias_gui_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to yuv_gui (see VARARGIN)
+% varargin   command line arguments to bias_gui (see VARARGIN)
 
-% Choose default command line output for yuv_gui
+% Choose default command line output for bias_gui
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-axes(handles.axes1);
-ys = zeros(256);
-ys = 128 + ys;
-us = linspace(0, 255, 256);
-vs = linspace(0, 255, 256);
-[X, Y] = meshgrid(us, vs);
-rgb = cat(3, ys, X, Y);
-yuv = yuv2rgb(rgb);
-imshow(yuv);
-draw_yuv(handles);
+global img;
+img = imread('Lenna.png');
 
-% UIWAIT makes yuv_gui wait for user response (see UIRESUME)
+axes(handles.axes1);
+imshow(img);
+draw_bias(handles);
+
+% UIWAIT makes bias_gui wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = yuv_gui_OutputFcn(hObject, eventdata, handles) 
+function varargout = bias_gui_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -93,7 +89,7 @@ function edit1_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of edit1 as text
 %        str2double(get(hObject,'String')) returns contents of edit1 as a double
 set(handles.slider1, 'Value', str2double(get(hObject,'String')));
-draw_yuv(handles);
+draw_bias(handles);
 
 % --- Executes during object creation, after setting all properties.
 function edit1_CreateFcn(hObject, eventdata, handles)
@@ -117,7 +113,7 @@ function slider1_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 set(handles.edit1, 'String', get(hObject,'Value'));
-draw_yuv(handles);
+draw_bias(handles);
 
 % --- Executes during object creation, after setting all properties.
 function slider1_CreateFcn(hObject, eventdata, handles)
@@ -140,7 +136,7 @@ function edit2_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of edit2 as text
 %        str2double(get(hObject,'String')) returns contents of edit2 as a double
 set(handles.slider2, 'Value', str2double(get(hObject,'String')));
-draw_yuv(handles);
+draw_bias(handles);
 
 % --- Executes during object creation, after setting all properties.
 function edit2_CreateFcn(hObject, eventdata, handles)
@@ -164,7 +160,7 @@ function slider2_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 set(handles.edit2, 'String', get(hObject,'Value'));
-draw_yuv(handles);
+draw_bias(handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -188,7 +184,7 @@ function edit3_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of edit3 as text
 %        str2double(get(hObject,'String')) returns contents of edit3 as a double
 set(handles.slider3, 'Value', str2double(get(hObject,'String')));
-draw_yuv(handles);
+draw_bias(handles);
 
 % --- Executes during object creation, after setting all properties.
 function edit3_CreateFcn(hObject, eventdata, handles)
@@ -212,7 +208,7 @@ function slider3_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 set(handles.edit3, 'String', get(hObject,'Value'));
-draw_yuv(handles);
+draw_bias(handles);
 
 
 % --- Executes during object creation, after setting all properties.
