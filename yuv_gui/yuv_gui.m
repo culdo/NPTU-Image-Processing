@@ -60,7 +60,6 @@ guidata(hObject, handles);
 
 axes(handles.axes1);
 ys = zeros(256, 256, 3);
-ys = 128 + ys;
 us = linspace(0, 255, 256);
 vs = linspace(0, 255, 256);
 [X, Y] = meshgrid(us, vs);
