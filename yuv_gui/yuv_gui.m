@@ -59,12 +59,14 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 axes(handles.axes1);
-ys = zeros(256, 256, 3);
+ys = zeros(256);
+ys = 128 + ys;
 us = linspace(0, 255, 256);
 vs = linspace(0, 255, 256);
 [X, Y] = meshgrid(us, vs);
-rgb = cat(3, X, Y);
-imshow(rgb);
+rgb = cat(3, ys, X, Y);
+yuv = yuv2rgb(rgb);
+imshow(yuv);
 
 % UIWAIT makes yuv_gui wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
