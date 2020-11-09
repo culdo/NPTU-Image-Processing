@@ -1,18 +1,18 @@
 clc;
 clear all;
 
-img = imread('Lenna.png');
+org_img = imread('Lenna.png');
 figure(1);
-imshow(img);
+imshow(org_img);
 
-img2 = imnoise(img, "Salt & Pepper", 0.01);
+noise_img = imnoise(org_img, "Salt & Pepper", 0.01);
 figure(2);
-imshow(img2);
+imshow(noise_img);
 N = 3;
 margin = (N-1)/2;
-img2_padded = zeros(size(img, 1)+N-1, size(img, 2)+N-1, 3);
-img2_padded(1+margin:size(img, 1)+margin, 1+margin:size(img, 2)+margin, :) = img2(:, :, :);
-result_img = zeros(size(img, 1), size(img, 2), 3);
+img2_padded = zeros(size(org_img, 1)+N-1, size(org_img, 2)+N-1, 3);
+img2_padded(1+margin:size(org_img, 1)+margin, 1+margin:size(org_img, 2)+margin, :) = noise_img(:, :, :);
+result_img = zeros(size(org_img, 1), size(org_img, 2), 3);
 
 for i=1+margin:size(img2_padded, 1)-margin
     for j=1+margin:size(img2_padded, 2)-margin
@@ -29,9 +29,12 @@ imshow(result_img);
 a = 1;
 b = 5;
 r = round((b-a).*rand(b,1) + a);
-imgs = {img2_padded, result_img};
+imgs = {org_img, result_img};
 figure(4);
-diff = immse(img{1},img{2});
+diff = immse(imgs{1}, imgs{2});
+psnr = 20 * log10(255) - 10*log10(diff);
+fprintf('MSE=%.2f\n', diff);
+fprintf('PSNR=%.2f', psnr);
 for i=1:2
     img = imgs{i};
     subplot(3, 2, i);

@@ -13,8 +13,7 @@ for i=1+margin:size(img, 1)-margin
     for j=1+margin:size(img, 2)-margin
         img_shadow = img2(i-margin:i+margin, j-margin:j+margin, :);
         img_shadow = reshape(img_shadow, N*N, 3);
-        mediam_temp = median(img_shadow, 1);
-        result_img(i-margin, j-margin, :) = mediam_temp;
+        result_img(i-margin, j-margin, :) = median(img_shadow, 1);
     end
 end
 
