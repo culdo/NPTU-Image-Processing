@@ -1,11 +1,10 @@
 org_img = imread('Lenna.png');
-org_img = rgb2gray(org_img);
 figure(1);
 imshow(org_img);
 
 N = 3;
 margin = (N-1)/2;
-img_dim = 1;
+img_dim = 3;
 % sharpen parameter
 a = 2;
 
@@ -21,6 +20,6 @@ for i=1+margin:size(img2_padded, 1)-margin
     end
 end
 
-figure(3);
+figure(2);
 result_img = uint8(result_img);
 imshow(result_img);

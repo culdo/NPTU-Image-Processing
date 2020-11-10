@@ -16,11 +16,11 @@ for i=1+margin:size(img2_padded, 1)-margin
         img_shadow = img2_padded(i-margin:i+margin, j-margin:j+margin, :);
         sobel_x = img_shadow .* [1 0 -1;2 0 -2; 1  0 -1];
         sobel_y = img_shadow .* [1 2  1;0 0  0;-1 -2 -1];
-        sobel = norm(sum(sum(sobel_x)), sum(sum(sobel_y)));
-        result_img(i-margin, j-margin, :) = sobel;
+        vect = norm(sum(sum(sobel_x)), sum(sum(sobel_y)));
+        result_img(i-margin, j-margin, :) = vect;
     end
 end
 
-figure(3);
+figure(2);
 result_img = uint8(result_img);
 imshow(result_img);

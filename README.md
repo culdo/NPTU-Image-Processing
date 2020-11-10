@@ -11,3 +11,9 @@ CIR-109 Image Processing 影像處理 @ 圖資大樓908
 ![Rotation demo](docs/rot_demo.gif "Rotation Demo")
 ## 5. 使用迭代完成縮放圖片
 ![Resize demo](docs/resize_demo.gif "Resize Demo")
+## 6. 使用均值與中位數濾波核過濾圖片
+![Filter demo](docs/filter_demo.gif "Filter Demo")
+## 7. 使用sobel邊緣檢測核檢測圖片
+![Sobel demo](docs/sobel_demo.gif "Sobel Demo")
+## 8. 使用銳化核銳化圖片
+![Sharpen demo](docs/sharpen_demo.gif "sharpen Demo")
