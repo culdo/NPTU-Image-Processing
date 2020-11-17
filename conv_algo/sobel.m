@@ -1,11 +1,11 @@
 org_img = imread('Lenna.png');
-org_img = rgb2gray(org_img);
+% org_img = rgb2gray(org_img);
 figure(1);
 imshow(org_img);
 
 N = 3;
 margin = (N-1)/2;
-img_dim = 1;
+img_dim = 3;
 
 img2_padded = zeros(size(org_img, 1)+N-1, size(org_img, 2)+N-1, img_dim);
 img2_padded(1+margin:size(org_img, 1)+margin, 1+margin:size(org_img, 2)+margin, :) = org_img(:, :, :);
@@ -16,7 +16,7 @@ for i=1+margin:size(img2_padded, 1)-margin
         img_shadow = img2_padded(i-margin:i+margin, j-margin:j+margin, :);
         sobel_x = img_shadow .* [1 0 -1;2 0 -2; 1  0 -1];
         sobel_y = img_shadow .* [1 2  1;0 0  0;-1 -2 -1];
-        vect = norm(sum(sum(sobel_x)), sum(sum(sobel_y)));
+        vect = vecnorm([sum(sum(sobel_x), 2) sum(sum(sobel_y), 2)]);
         result_img(i-margin, j-margin, :) = vect;
     end
 end
