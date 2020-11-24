@@ -3,15 +3,15 @@ org_img = imread('Lenna.png');
 figure(1);
 imshow(org_img);
 
-% sobel_kernel_h = [1  2  1
-%                   0  0  0
-%                  -1 -2 -1];
+sobel_kernel_h = [1  2  1
+                  0  0  0
+                 -1 -2 -1];
              
-sobel_kernel_h = [2  3  4  3  2
-                  1  2  3  2  1
-                  0  0  0  0  0
-                 -1 -2 -3 -2 -1
-                 -2 -3 -4 -3 -2];
+% sobel_kernel_h = [2  3  4  3  2
+%                   1  2  3  2  1
+%                   0  0  0  0  0
+%                  -1 -2 -3 -2 -1
+%                  -2 -3 -4 -3 -2];
 
 % sobel_kernel_h = [3  4  5  6  5  4  3
 %                   2  3  4  5  4  3  2
@@ -25,11 +25,11 @@ sobel_kernel_v = sobel_kernel_h.';
 
 N = size(sobel_kernel_h, 1);
 margin = (N-1)/2;
-img_dim = 3;
+[org_h, org_w, img_dim] = size(org_img);
 
-img2_padded = zeros(size(org_img, 1)+N-1, size(org_img, 2)+N-1, img_dim);
-img2_padded(1+margin:size(org_img, 1)+margin, 1+margin:size(org_img, 2)+margin, :) = org_img(:, :, :);
-result_img = zeros(size(org_img, 1), size(org_img, 2), img_dim);
+img2_padded = zeros(org_h+N-1, org_w+N-1, img_dim);
+img2_padded(1+margin:org_h+margin, 1+margin:org_w+margin, :) = org_img(:, :, :);
+result_img = zeros(org_h, org_w, img_dim);
 
 for i=1+margin:size(img2_padded, 1)-margin
     for j=1+margin:size(img2_padded, 2)-margin
