@@ -4,10 +4,6 @@ org_img = imbinarize(org_img, 0.5);
 figure(1);
 imshow(org_img);
 
-global N margin;
-N = 3;
-margin = (N-1)/2;
-
 result_img = dilate(org_img, 5);
 figure(2);
 imshow(result_img);
@@ -17,8 +13,8 @@ figure(3);
 imshow(result_img);
 
 function result_img = dilate(img, times)
-    global N;
-    global margin;
+    N = 3;
+    margin = (N-1)/2;
     [org_h, org_w] = size(img);
 
     img2_padded = zeros(org_h+N-1, org_w+N-1);
@@ -41,8 +37,9 @@ function result_img = dilate(img, times)
 end
 
 function result_img = erose(img, times)
-    global N;
-    global margin;
+    N = 3;
+    margin = (N-1)/2;
+    
     [org_h, org_w] = size(img);
 
     img2_padded = zeros(org_h+N-1, org_w+N-1);

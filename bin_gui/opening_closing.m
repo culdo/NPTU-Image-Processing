@@ -4,10 +4,6 @@ org_img = imbinarize(org_img, 0.5);
 figure(1);
 imshow(org_img);
 
-global N margin;
-N = 3;
-margin = (N-1)/2;
-
 result_img = opening(org_img, 5, 1);
 figure(2);
 imshow(result_img);
@@ -55,31 +51,10 @@ function result_img = closing(img, times1, times2)
     return
 end
 
-function result_img = dilate(img, times)
-    global N;
-    global margin;
-    [org_h, org_w] = size(img);
-
-    result_img = zeros(org_h, org_w, 'logical');
-    for k=1:times
-        for i=1+margin:size(img, 1)-margin
-            for j=1+margin:size(img, 2)-margin
-                img_shadow = img(i-margin:i+margin, j-margin:j+margin);
-                if sum(img_shadow(:)) > 0
-                    result_img(i-margin:i+margin, j-margin:j+margin) = 1;
-                else
-                    result_img(i-margin:i+margin, j-margin:j+margin) = 0;
-                end
-            end
-        end
-        img = result_img;
-    end
-    return
-end
 
 function result_img = erose(img, times)
-    global N;
-    global margin;
+    N = 3;
+    margin = (N-1)/2;
     [org_h, org_w] = size(img);
 
     result_img = zeros(org_h, org_w, 'logical');
